@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<!-- viewport for responsive design / mobile -->
-		<meta name="viewport" content="width=device-width, initial -scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="main.css">
@@ -14,10 +14,17 @@
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
 					<h1 class="text-center">Dave's Microblog</h1>
-					<ul>
-						<li><strong>ran 3 miles</strong> - cardiovascular</li>
+					<ul id="blogposts-list">
+						<script id="microblog-template" type="text/x-handlebars-template">
+							{{#each blogPosts}}
+								<h2>{{title}}</h2>
+								<br>
+								<p>{{story}}</p>
+							{{/each}}
+						</script>
+						<li><strong>ran 3 miles</strong> - cardio</li>
 						<li><strong>yoga</strong> - core</li>
-						<li><strong>spinning</strong> - cardiovascular</li>
+						<li><strong>ran 5 miles</strong> - cardio</li>
 					</ul>
 				</div>
 			</div>
