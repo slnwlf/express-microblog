@@ -19,26 +19,32 @@ $(document).ready(function() {
 		});
 		$('#blogposts-list').append(blogpostsHtml);
 	});
+	console.log("GET route is working");
 
-	// POST route 
+	/////////////////
+	// POST route ///
+	/////////////////
 
-	// form to create a new blogpost
+	// form to create a new blogpost, ie POST
 
 	var $createBlogpost = $('#create-blogposts');
+	console.log("the POST route has started.");
 
 	$createBlogpost.on('submit', function(event) {
+		console.log("submit was clicked.");
 		event.preventDefault();
 
 		// serialze form data
 		var newBlogpost = $(this).serialize();
+		console.log("passing by newBlogpost var");
 
 		// POST request to create new blogpost
 		$.post('/api/blogposts', newBlogpost, function(data) {
 			console.log(data);
 
 			// add new book to allBlogposts
-			$('#blogposts-list').append(todoHtml);
-			allTodos.push(data);
+			$('#blogposts-list').append(blogpostsHtml);
+			allBlogposts.push(data);
 
 			// render all blogposts to view
 			render();
@@ -49,8 +55,27 @@ $(document).ready(function() {
 		$createBlogpost.find('input').first().focus();
 	});
 
-	// $('#create-blogpost').on('submit', function (event) {
-	// 	event.preventDefault();
-	// });
+
+	///////////////////
+	/// DELETE route///
+	///////////////////
+
+
+
+		// DELETE request to delete blogpost
+
+		$.ajax({
+			type: 'DELETE',
+			url: '/api/blogposts' + '/' + blogpostId,
+			success: function(data) {
+
+				// remove deleted blogpost from all todos
+				allBlogposts.splice(allBlogposts.indexOf(blogPostDelete), 1);
+
+				// render all blogposts to view
+				render();
+			}
+	// 	});
+	});
 
 });
