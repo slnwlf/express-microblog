@@ -18,7 +18,9 @@ $(function() {
 		$('#blogposts-list').append(blogpostsHtml);
 	});
 
-	$('#create-blogpost').on('submit', function (event) {
-		event.preventDefault();
-	});
+// Need to figure out how to get the button action to work. 
+
+	// $('#create-blogpost').on('submit', function (event) {
+	// 	event.preventDefault();
+	// });
 });

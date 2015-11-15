@@ -50,6 +50,15 @@ app.get('/api/blogposts', function (req, res) {
 	});
 });
 
+// trying to figure out how to get the action from the button
+
+// app.post('/api/blogposts', function (req, res) {
+// 	var newBlogpost = new Blogpost(req.body);
+// 	newBlogpost.save(function (err, savedTodo) {
+// 		res.json(savedblogPost);
+// 	});
+// });
+
 
 // starting server on localhost: 3000
 app.listen(3000, function() {
