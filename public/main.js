@@ -13,11 +13,12 @@ $(function() {
 
 	$.get('/api/blogposts', function(data) {
 		allBlogposts = data.blogposts;
-		
-		var blogpostsHtml = template({
-			blogposts: data.blogposts
-		});
-		$('#blogposts-list').append(blogpostsHtml);
 
+		var blogpostsHtml = template({ blogposts: allBlogposts });
+		$('#blogposts-list').append(blogpostsHtml);
+	});
+
+	$('#create-blogpost').on('submit', function (event) {
+		event.preventDefault();
 	});
 });
