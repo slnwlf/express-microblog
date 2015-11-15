@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 	console.log("Javascript is working!");
 
 	// compile handlebars template
@@ -14,13 +14,43 @@ $(function() {
 	$.get('/api/blogposts', function(data) {
 		allBlogposts = data.blogposts;
 
-		var blogpostsHtml = template({ blogposts: allBlogposts });
+		var blogpostsHtml = template({
+			blogposts: allBlogposts
+		});
 		$('#blogposts-list').append(blogpostsHtml);
 	});
 
-// Need to figure out how to get the button action to work. 
+	// POST route 
+
+	// form to create a new blogpost
+
+	var $createBlogpost = $('#create-blogposts');
+
+	$createBlogpost.on('submit', function(event) {
+		event.preventDefault();
+
+		// serialze form data
+		var newBlogpost = $(this).serialize();
+
+		// POST request to create new blogpost
+		$.post('/api/blogposts', newBlogpost, function(data) {
+			console.log(data);
+
+			// add new book to allBlogposts
+			$('#blogposts-list').append(todoHtml);
+			allTodos.push(data);
+
+			// render all blogposts to view
+			render();
+		});
+
+		// reset the form
+		$createBlogpost[0].reset();
+		$createBlogpost.find('input').first().focus();
+	});
 
 	// $('#create-blogpost').on('submit', function (event) {
 	// 	event.preventDefault();
 	// });
+
 });
