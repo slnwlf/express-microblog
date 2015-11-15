@@ -2,7 +2,8 @@ $(function() {
 	console.log("Javascript is working!");
 
 	// compile handlebars template
-	var source = $('#microblog-template').html();
+
+	var source = $('#blogposts-template').html();
 	var template = Handlebars.compile(source);
 
 
@@ -11,14 +12,12 @@ $(function() {
 	// AJAX call to GET all blogposts
 
 	$.get('/api/blogposts', function(data) {
-		allBlogposts = data.blogPosts;
-		var blogpostsHtml = template({ blogPosts: data.blogPosts
+		allBlogposts = data.blogposts;
+		
+		var blogpostsHtml = template({
+			blogposts: data.blogposts
 		});
-		$('#blogPosts-list').append(blogpostsHtml);
-	});
+		$('#blogposts-list').append(blogpostsHtml);
 
-	var blogpostsHtml = template({
-		blogPosts: allBlogposts
 	});
-	$('#blogposts-list').append(blogpostsHtml);
 });
