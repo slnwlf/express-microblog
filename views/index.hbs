@@ -16,11 +16,11 @@
 					<h1 class="text-center">Dave's Microblog</h1>
 					<ul id="blogPosts-list">
 						<script id="microblog-template" type="text/x-handlebars-template">
-							{{#each blogPosts}}
-								<h2>{{title}}</h2>
+							\{{#each blogPosts}}
+								<h2>\{{title}}</h2>
 								<br>
-								<p>{{story}}</p>
-							{{/each}}
+								<p>\{{story}}</p>
+							\{{/each}}
 						</script>
 						<li><strong>ran 3 miles</strong> - cardio</li>
 						<li><strong>yoga</strong> - core</li>
@@ -29,8 +29,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
 		<!-- jquery  -->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<!-- handlebars -->
