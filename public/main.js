@@ -5,6 +5,21 @@ $(document).ready(function() {
 	var source = $('#blogposts-template').html();
 	var template = Handlebars.compile(source);
 
+	// helper function to render all blogposts to view
+	// note: we empty and re-render the collection each time our blogpost data changes
+
+	var render = function() {
+		// empty existing blogposts from view
+		$blogpostsList.empty();
+
+		// pass blogposts into the template function
+		var blogpostsHtml = template({
+			blogposts: allBlogposts
+		});
+
+		// append html to the view
+		$blogpostsList.append(blogpostsHtml);
+	};
 
 	// API routes
 
@@ -35,7 +50,6 @@ $(document).ready(function() {
 
 		// serialze form data
 		var newBlogpost = $(this).serialize();
-		console.log("passing by newBlogpost var");
 
 		// POST request to create new blogpost
 		$.post('/api/blogposts', newBlogpost, function(data) {
@@ -67,19 +81,18 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		// find the blogpost's id (stored in HTML as data-id)
-		var blogpostId = $(this).closest('#blogposts-list').attr('data-id = \{{_id}}');
+		var blogpostId = $(this).closest('#blogposts-list').attr('data-id');
 
 		var blogpostsToDelete = allBlogposts.filter(function(blogpost) {
 			return blogpost._id == blogpostId;
 		})[0];
 
 		console.log("Got through the click event in the DELETE route");
-		console.log(blogpostId);
 		// DELETE request to delete blogpost
 
 		$.ajax({
 			type: 'DELETE',
-			url: '/api/blogposts' + '/' + blogpostId,
+			url: '/api/blogposts/' + blogpostId,
 			success: function(data) {
 				// remove deleted blogpost from all blogposts
 				console.log("Inside the AJAX call");
@@ -90,5 +103,4 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 });
