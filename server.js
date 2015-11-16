@@ -44,19 +44,40 @@ app.get('/', function (req, res) {
 
 // API routes
 
+/////////////////////////
+///// GET route /////////
+/////////////////////////
+
 app.get('/api/blogposts', function (req, res) {
 	Blogpost.find(function (err, allBlogposts) {
 	res.json({ blogposts: allBlogposts });
 	});
 });
 
-// trying to figure out how to get the action from the button
+/////////////////////////
+////  POST route ////////
+/////////////////////////
 
 app.post('/api/blogposts', function (req, res) {
 	var newBlogpost = new Blogpost(req.body);
 	newBlogpost.save(function (err, savedBlogPost) {
 		res.json(savedBlogPost);
 	});
+});
+
+///////////////////////
+//// Delete route /////
+///////////////////////
+
+app.delete('/api/blogposts/:id', function (req, res) {
+  // get blogpost id from url params (`req.params`)
+
+  var blogpostId = req.params.id;
+
+  // find todo in db by id and remove
+  Blogpost.findOneAndRemove({ _id: blogpostId }, function (err, deletedBlogpost) {
+      res.json(deletedBlogpost);
+  });
 });
 
 

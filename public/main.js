@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	console.log("Javascript is working!");
 
 	// compile handlebars template
 
@@ -41,6 +40,7 @@ $(document).ready(function() {
 		// POST request to create new blogpost
 		$.post('/api/blogposts', newBlogpost, function(data) {
 			console.log(data);
+			console.log("getting through the CREATE route");
 
 			// add new book to allBlogposts
 			$('#blogposts-list').append(blogpostsHtml);
@@ -60,22 +60,35 @@ $(document).ready(function() {
 	/// DELETE route///
 	///////////////////
 
+	// #blogposts-list
 
+	$('#blogposts-list').on('click', '.delete-blogpost', function(event) {
+		console.log("The delete button was clicked!");
+		event.preventDefault();
 
+		// find the blogpost's id (stored in HTML as data-id)
+		var blogpostId = $(this).closest('#blogposts-list').attr('data-id');
+
+		var blogpostsToDelete = allBlogposts.filter(function(blogpost) {
+			return blogpost._id == blogpostId;
+		})[0];
+
+		console.log("Got through the click event.");
 		// DELETE request to delete blogpost
 
 		$.ajax({
 			type: 'DELETE',
 			url: '/api/blogposts' + '/' + blogpostId,
 			success: function(data) {
-
-				// remove deleted blogpost from all todos
-				allBlogposts.splice(allBlogposts.indexOf(blogPostDelete), 1);
+			console.log(blogpostId);
+				// remove deleted blogpost from all blogposts
+				console.log("Inside the AJAX call");
+				allBlogposts.splice(allBlogposts.indexOf(blogpostsToDelete), 1);
 
 				// render all blogposts to view
 				render();
 			}
-	// 	});
+		});
 	});
 
 });

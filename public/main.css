@@ -1,5 +1,6 @@
 body {
-	background-color: white;
+	background-color: #f2f2f2;
+	color: #1a1a1a; 
 }
 .medium-stuff {
 	max-width: 80%;
@@ -11,10 +12,17 @@ body {
 }
 .medium-right {
 	float: right;
-	margin: 6px;
+	margin: 5px;
+	z-index: -1;
 }
 #blogposts-list {
 	border: black solid 3px; 
+}
+#blogposts-template {
+	clear: both;
+}
+#profile-photo {
+	margin: 1px;
 }
 /*#blogposts-template {
 	border: black solid 3px;

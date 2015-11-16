@@ -31,10 +31,10 @@
 						<div class="modal-body">
 							<form class="contact" id="create-blogposts">
 								<div class="form-group">
-									<input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
+									<textarea type="text" name="title" class="input-xlarge form-control" placeholder="Title" value="\{{title}}"></textarea>
 								</div>
 								<div class="form-group">
-									<textarea type="text" name="story" class="input-xlarge form-control" name="story" placeholder="Story" value="\{{story}}"></textarea>
+									<textarea type="text" class="input-xlarge form-control" name="story" placeholder="Story" value="\{{story}}"></textarea>
 									<br>
 								</div>
 								<div class="form-group">
@@ -49,7 +49,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 medium-left">
+			<div class="col-lg-4 medium-left">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search for...">
 					<span class="input-group-btn">
@@ -58,26 +58,24 @@
 				</div>
 			</div>
 			<div class="medium-right">
-				<img src="DAS-profile.png">
+				<img src="DAS-profile.png" id="profile-photo">
 			</div>
 		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<ul class="clearfix" id="blogposts-list">
+					<ul id="blogposts-list">
 						<script id="blogposts-template" type="text/x-handlebars-template">
 							\{{#each blogposts}}
 								<h2>\{{title}}</h2>
 								<p>\{{story}}</p>
-						<button type="button" class="btn btn-primary btn-md medium-right">
-						<span class="glyphicon glyphicon-pencil edit-blogpost" aria-hidden="true"></span> Edit </button>
-						<button type="button" class="btn btn-primary btn-md medium-right">
-						<span class="glyphicon glyphicon-trash delete-blogpost" aria-hidden="true"></span> Delete </button>
+								<p>Blog ID #: \{{_id}}</p>
+						<button type="button" class="btn btn-primary btn-md span6 pull-right">
+						<span class="glyphicon glyphicon-pencil edit-blogpost" id="edit-blogpost" aria-hidden="true"></span> Edit </button>
+						<button type="button" class="btn btn-primary btn-md pull-right delete-blogpost">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete </button>
 							\{{/each}}
 						</script>
-						<!-- 						<li><strong>ran 3 miles</strong> - cardio</li>
-						<li><strong>yoga</strong> - core</li>
-						<li><strong>ran 5 miles</strong> - cardio</li> -->
 					</ul>
 				</div>
 			</div>
