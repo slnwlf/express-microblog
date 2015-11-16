@@ -67,20 +67,20 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		// find the blogpost's id (stored in HTML as data-id)
-		var blogpostId = $(this).closest('#blogposts-list').attr('data-id');
+		var blogpostId = $(this).closest('#blogposts-list').attr('data-id = \{{_id}}');
 
 		var blogpostsToDelete = allBlogposts.filter(function(blogpost) {
 			return blogpost._id == blogpostId;
 		})[0];
 
-		console.log("Got through the click event.");
+		console.log("Got through the click event in the DELETE route");
+		console.log(blogpostId);
 		// DELETE request to delete blogpost
 
 		$.ajax({
 			type: 'DELETE',
 			url: '/api/blogposts' + '/' + blogpostId,
 			success: function(data) {
-			console.log(blogpostId);
 				// remove deleted blogpost from all blogposts
 				console.log("Inside the AJAX call");
 				allBlogposts.splice(allBlogposts.indexOf(blogpostsToDelete), 1);

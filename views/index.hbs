@@ -63,13 +63,12 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-8 col-md-offset-2" data-id="\{{_id}}">
 					<ul id="blogposts-list">
 						<script id="blogposts-template" type="text/x-handlebars-template">
 							\{{#each blogposts}}
-								<h2>\{{title}}</h2>
+								<h3>\{{title}}</h3>
 								<p>\{{story}}</p>
-								<p>Blog ID #: \{{_id}}</p>
 						<button type="button" class="btn btn-primary btn-md span6 pull-right">
 						<span class="glyphicon glyphicon-pencil edit-blogpost" id="edit-blogpost" aria-hidden="true"></span> Edit </button>
 						<button type="button" class="btn btn-primary btn-md pull-right delete-blogpost">
