@@ -4,6 +4,9 @@ $(document).ready(function() {
 
 	var source = $('#blogposts-template').html();
 	var template = Handlebars.compile(source);
+	var allBlogposts = [];
+	var $blogpostsList = $('#blogposts-list');
+
 
 	// helper function to render all blogposts to view
 	// note: we empty and re-render the collection each time our blogpost data changes
@@ -13,6 +16,7 @@ $(document).ready(function() {
 		$blogpostsList.empty();
 
 		// pass blogposts into the template function
+
 		var blogpostsHtml = template({
 			blogposts: allBlogposts
 		});
@@ -27,11 +31,8 @@ $(document).ready(function() {
 
 	$.get('/api/blogposts', function(data) {
 		allBlogposts = data.blogposts;
+		render();
 
-		var blogpostsHtml = template({
-			blogposts: allBlogposts
-		});
-		$('#blogposts-list').append(blogpostsHtml);
 	});
 	console.log("GET route is working");
 
@@ -50,6 +51,8 @@ $(document).ready(function() {
 
 		// serialze form data
 		var newBlogpost = $(this).serialize();
+		console.log(newBlogpost);
+		$("").class = newBlogpost.id;
 
 		// POST request to create new blogpost
 		$.post('/api/blogposts', newBlogpost, function(data) {
@@ -57,7 +60,6 @@ $(document).ready(function() {
 			console.log("getting through the CREATE route");
 
 			// add new book to allBlogposts
-			$('#blogposts-list').append(blogpostsHtml);
 			allBlogposts.push(data);
 
 			// render all blogposts to view
@@ -81,7 +83,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		// find the blogpost's id (stored in HTML as data-id)
-		var blogpostId = $(this).closest('#blogposts-list').attr('data-id');
+		var blogpostId = $(this).closest('.kitty').attr('data-id');
 
 		var blogpostsToDelete = allBlogposts.filter(function(blogpost) {
 			return blogpost._id == blogpostId;
