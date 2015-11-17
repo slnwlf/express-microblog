@@ -83,7 +83,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		// find the blogpost's id (stored in HTML as data-id)
-		var blogpostId = $(this).closest('.kitty').attr('data-id');
+		var blogpostId = $(this).closest('.blogpost-closest').attr('data-id');
 
 		var blogpostsToDelete = allBlogposts.filter(function(blogpost) {
 			return blogpost._id == blogpostId;

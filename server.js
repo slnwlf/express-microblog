@@ -1,9 +1,12 @@
 var express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser');
-	mongoose = require('mongoose');
-	hbs = require('hbs');
+mongoose = require('mongoose');
+hbs = require('hbs');
 
+// require Blogpost and Comment models
+var Blogpost = require('./models/blogpost');
+var Comment = require('./models/comment');
 // bodyParser gets data out of forms
 
 app.use(bodyParser.urlencoded({
@@ -29,7 +32,7 @@ var Blogpost = require('./models/blogpost');
 
 // Homepage route (temp - pre Mongo)
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
 	res.render('index');
 });
 
@@ -48,9 +51,11 @@ app.get('/', function (req, res) {
 ///// GET route /////////
 /////////////////////////
 
-app.get('/api/blogposts', function (req, res) {
-	Blogpost.find(function (err, allBlogposts) {
-	res.json({ blogposts: allBlogposts });
+app.get('/api/blogposts', function(req, res) {
+	Blogpost.find(function(err, allBlogposts) {
+		res.json({
+			blogposts: allBlogposts
+		});
 	});
 });
 
@@ -58,9 +63,9 @@ app.get('/api/blogposts', function (req, res) {
 ////  POST route ////////
 /////////////////////////
 
-app.post('/api/blogposts', function (req, res) {
+app.post('/api/blogposts', function(req, res) {
 	var newBlogpost = new Blogpost(req.body);
-	newBlogpost.save(function (err, savedBlogPost) {
+	newBlogpost.save(function(err, savedBlogPost) {
 		res.json(savedBlogPost);
 	});
 });
@@ -69,15 +74,50 @@ app.post('/api/blogposts', function (req, res) {
 //// Delete route /////
 ///////////////////////
 
-app.delete('/api/blogposts/:id', function (req, res) {
-  // get blogpost id from url params (`req.params`)
+app.delete('/api/blogposts/:id', function(req, res) {
+	// get blogpost id from url params (`req.params`)
 
-  var blogpostId = req.params.id;
+	var blogpostId = req.params.id;
 
-  // find todo in db by id and remove
-  Blogpost.findOneAndRemove({ _id: blogpostId }, function (err, deletedBlogpost) {
-      res.json(deletedBlogpost);
-  });
+	// find todo in db by id and remove
+	Blogpost.findOneAndRemove({
+		_id: blogpostId
+	}, function(err, deletedBlogpost) {
+		res.json(deletedBlogpost);
+	});
+});
+
+////////////////////////
+///// Comments /////////
+////////////////////////
+
+// route to create new comment associated to blogpost
+app.post('/api/blogposts/:id/comments', function(req, res) {
+	// find blogpost id from url params
+	var blogpostId = req.params.id;
+
+	// find blogpost in db using blogpost id
+	Blogpost.findOne({
+		_id: blogpostId
+	}, function(err, foundBlogpost) {
+		// create new comment
+		var newComment = new Comment(req.body);
+
+		// SAVE new comment
+		// NOTE this is not required for embedding,
+		// but it is for referencing!
+		// saving the comment adds it to the comments collection
+		newComment.save();
+
+		// give it to foundblogpost.comments (`.push()`)
+		foundBlogpost.comments.push(newComment);
+
+		// save foundblogpost with new comment added
+		foundBlogpost.save();
+
+		// respond with new comment
+		res.json(newComment);
+	});
 });
 
 

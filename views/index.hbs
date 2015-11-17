@@ -67,13 +67,15 @@
 					<ul id="blogposts-list">
 						<script id="blogposts-template" type="text/x-handlebars-template">
 							\{{#each blogposts}}
-							<li class="kitty" data-id="\{{_id}}">
+							<li class="blogpost-closest" data-id="\{{_id}}">
 								<h3>\{{title}}</h3>
 								<p>\{{story}}</p>
-								<button type="button" class="btn btn-primary btn-md pull-right">
+								<button type="button" class="btn btn-primary btn-sm">
 								<span class="glyphicon glyphicon-pencil edit-blogpost" id="edit-blogpost" aria-hidden="true"></span> Edit </button>
-								<button type="button" class="btn btn-primary btn-md pull-right delete-blogpost">
+								<button type="button" class="btn btn-primary btn-sm delete-blogpost">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete </button>
+								<button type="button" class="btn btn-primary btn-sm delete-blogpost">
+								<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment </button>
 						    </li>
 							\{{/each}}
 						</script>

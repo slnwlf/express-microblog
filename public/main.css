@@ -2,6 +2,9 @@ body {
 	background-color: #f2f2f2;
 	color: #1a1a1a; 
 }
+ul {
+	list-style: none;
+}
 .medium-stuff {
 	max-width: 80%;
 	margin: 20px auto;
@@ -16,10 +19,11 @@ body {
 	z-index: -1;
 }
 .btn {
-	margin: 2px; 
+	margin: 4px; 
 }
-#blogposts-list {
-	border: black solid 3px; 
+.blogpost-closest {
+	border: black solid 2px; 
+	margin: 5px;
 }
 #blogposts-template {
 	clear: both;
