@@ -8,13 +8,13 @@ var BlogpostSchema = new Schema({
     default: ""
   },
   // EMBEDDING
-  // comments: [Comment.schema]
+  comments: [Comment.schema]
 
-  // REFERENCING
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Comment'
-  }]
+  // // REFERENCING
+  // comments: [{
+  //   type: Schema.Types.ObjectId,
+  //   // ref: 'Comment'
+  // }]
 });
 
 var Blogpost = mongoose.model('Blogpost', BlogpostSchema);
